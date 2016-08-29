@@ -1,14 +1,10 @@
 package DavidMencos.Helpers;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.event.InputEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -105,30 +101,6 @@ public class AuxTestMethods {
         } catch (Exception e){
                 System.out.println(e.getMessage());
                 throw (e);
-        }
-    }
-
-    public static void movePaymentSlide(WebDriver driver, WebElement element, String payValue){
-        try{
-            String[] regex = new String[]{"^\\$\\d+", "^(.)+ - \\$"};
-            org.openqa.selenium.Point p = element.getLocation();
-            int x = p.getX();
-            int y = p.getY();
-            Dimension d = element.getSize();
-            int h = d.getHeight();
-            int w = d.getWidth();
-            Robot robot = new Robot();
-            robot.mouseMove(x + (w / 2), y + (h / 2) + 100);
-            robot.mousePress(InputEvent.BUTTON1_MASK);
-            String priceShowed = driver.findElement(By.xpath("//div[contains(@id, 'financeLowValue')]")).getText().replaceAll("^(.)+ - \\$", "");
-            while(!priceShowed.equals("600")){
-                priceShowed = driver.findElement(By.xpath("//div[contains(@id, 'financeLowValue')]")).getText().replaceAll("^(.)+ - \\$", "");
-                x += 1;
-                robot.mouseMove(x + (w / 2), y + (h / 2) + 100);
-            }
-            robot.mouseRelease(InputEvent.BUTTON1_MASK);
-        }catch (Exception e){
-            Assert.fail("Error trying to move slide.");
         }
     }
 }
