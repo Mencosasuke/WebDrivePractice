@@ -33,11 +33,12 @@ public class ExerciseThree extends Driver {
             this.movePaymentSlide(lowerHandler, "min", 400);
             // Select to the model view, if trim view is selected by default
             if(driver.findElement(By.xpath("//span[contains(@id, 'trimSwitchView')]")).getAttribute("class").contains("text--active")){
-                driver.findElement(By.xpath("//div[contains(@id, 'changeVilSwitch')]")).click();
+                AuxTestMethods.ClickElementsJS(driver, driver.findElement(By.xpath("//div[contains(@id, 'changeVilSwitch')]")));
                 AuxTestMethods.ClickTrimModelVariationMessage(driver);
             }
             // Waits for the page is loaded
-            Thread.sleep(1000);
+//            Thread.sleep(1000);
+            AuxTestMethods.waitForPageLoad(driver);
             // Begins the loop on the page to find all the cars that have to be present
             int totalCarsFound = Integer.valueOf(driver.findElement(By.xpath("//span[contains(@id, 'totalResults')]")).getText());
             int vehiclesCount = 0;
@@ -45,28 +46,28 @@ public class ExerciseThree extends Driver {
             WebElement div = resultsNode.findElement(By.xpath("div"));
             String id = "";
             do{
-                do{
+                while(div != null){
                     try {
                         id = div.getAttribute("id");
                         System.out.println(id);
                         vehiclesCount++;
                         div = div.findElements(By.xpath("following-sibling::div")).get(0);
                     }catch (Exception e){
-                        break;
+                        div = null;
                     }
-                }while(div != null);
+                }
                 ((JavascriptExecutor) driver).executeScript(String.format("document.getElementById('%s').scrollIntoView({block: 'start', behavior: 'smooth'});", id));
                 System.out.println(String.format("Cars found: %d. Totals cars found: %d.", vehiclesCount, totalCarsFound));
                 Thread.sleep(1000);
 //                div = driver.findElement(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id)));
                 try{
-                    div = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id))));
+                    div = shortWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id))));
                 }catch (Exception e){
                     Assert.assertEquals(vehiclesCount, totalCarsFound);
                 }
             }while(vehiclesCount < totalCarsFound);
 
-            System.out.println(String.format("Cars found: %d. Totals cars found: %d.", vehiclesCount, totalCarsFound));
+            System.out.println(String.format(">>>> Total cars found: %d. Totals cars count: %d.", vehiclesCount, totalCarsFound));
 
         }catch (Exception e){
             Assert.fail(String.format("Generic fail test %s", e.getMessage()));
