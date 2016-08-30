@@ -25,9 +25,10 @@ public class ExerciseTwo extends Driver {
         try {
             driver.get("http://www.autoweb.com");
             // Selects the Make & Model menu
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'src-home__bar-list__container')]/ul/li[contains(@class, 'src-home__bar-list__item')]/a/span[contains(@class, 'icon-makemodel')]"))).click();
+            AuxTestMethods.ClickElementsJS(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class, 'src-home__bar-list__container')]/ul/li[contains(@class, 'src-home__bar-list__item')]/a/span[contains(@class, 'icon-makemodel')]"))));
+            AuxTestMethods.waitForPageLoad(driver);
             // Clicks on the Make drop down list to make it visible
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@id, 'aw-dropdown-makes')]"))).click();
+            AuxTestMethods.ClickElementsJS(driver, wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@id, 'aw-dropdown-makes')]"))));
             // Gets the Make drop down list and clicks the desired Make
             AuxTestMethods.ClickElementsJS(driver, wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//div[contains(@id, 'make-dropdown')]/ul/li/a[contains(@data-aw-make, '%s')]", make)))));
             // Gets the Model drop down list and clicks the desired Model
@@ -37,7 +38,7 @@ public class ExerciseTwo extends Driver {
             try{
                 // Looks for the Make active tag and clicks on it
                 makeTagFound = shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//div[contains(@id, 'content-activeFilters')]/div[contains(@data-aw-make, '%s')]", make))));
-                makeTagFound.click();
+                AuxTestMethods.ClickElementsJS(driver, makeTagFound);
                 // Looks for the active models in the Make filter
                 WebElement activeFilters = shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//div[contains(@id, 'filterOptions')]", model))));
                 try{
