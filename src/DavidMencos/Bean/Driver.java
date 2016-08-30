@@ -29,7 +29,7 @@ public abstract class Driver {
         driver = new FirefoxDriver(capabilities);
         wait = new WebDriverWait(driver, 10, 1);
         shortWait = new WebDriverWait(driver, 4, 1);
-//        driver.manage().window().maximize();
+        driver.manage().window().maximize();
     }
 
     @AfterMethod (alwaysRun = true)

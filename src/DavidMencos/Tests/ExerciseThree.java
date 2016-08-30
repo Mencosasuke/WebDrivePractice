@@ -20,7 +20,7 @@ public class ExerciseThree extends Driver {
     @Test
     public void TestFinancePaymentFilter(){
         try {
-            driver.get("http://qa.autoweb.com/search");
+            driver.get("http://www.autoweb.com/search");
             AuxTestMethods.waitForPageLoad(driver);
             AuxTestMethods.ClickTrimModelVariationMessage(driver);
             // Moves the Ideal Monthly Payment to select the desired value
