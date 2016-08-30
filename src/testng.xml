@@ -6,8 +6,9 @@
         <classes>
             <!--<class name="DavidMencos.Tests.ExerciseOne" />-->
             <!--<class name="DavidMencos.Tests.ExerciseTwo" />-->
-            <!--<class name="DavidMencos.Tests.ExerciseThree" />-->
-            <class name="DavidMencos.Tests.ExerciseFour" />
+            <class name="DavidMencos.Tests.ExerciseThree" />
+            <!--<class name="DavidMencos.Tests.ExerciseFour" />-->
+            <!--<class name="DavidMencos.Tests.ExerciseFive" />-->
         </classes>
     </test>
 </suite>
