@@ -24,12 +24,12 @@ public class ExerciseThree extends Driver {
             AuxTestMethods.waitForPageLoad(driver);
             AuxTestMethods.ClickTrimModelVariationMessage(driver);
             // Moves the Ideal Monthly Payment to select the desired value
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@id, 'financePayment')]"))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@id, 'financePayment')]"))).click();
             WebElement upperHandler = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@id, 'financeSlider')]/div[contains(@class, 'noUi-base')]/div[contains(@class, 'noUi-origin noUi-background')]/div[contains(@class, 'noUi-handle-upper')]")));
-            upperHandler.click();
+            AuxTestMethods.ClickElementsJS(driver, upperHandler);
             this.movePaymentSlide(upperHandler, "max", 600);
             WebElement lowerHandler = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@id, 'financeSlider')]/div[contains(@class, 'noUi-base')]/div[contains(@class, 'noUi-origin noUi-connect')]/div[contains(@class, 'noUi-handle-lower')]")));
-            lowerHandler.click();
+            AuxTestMethods.ClickElementsJS(driver, lowerHandler);
             this.movePaymentSlide(lowerHandler, "min", 400);
             // Select to the model view, if trim view is selected by default
             if(driver.findElement(By.xpath("//span[contains(@id, 'trimSwitchView')]")).getAttribute("class").contains("text--active")){
@@ -61,7 +61,7 @@ public class ExerciseThree extends Driver {
                 Thread.sleep(1000);
 //                div = driver.findElement(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id)));
                 try{
-                    div = shortWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id))));
+                    div = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//div[contains(@id, '%s')]/following-sibling::div", id))));
                 }catch (Exception e){
                     Assert.assertEquals(vehiclesCount, totalCarsFound);
                 }
