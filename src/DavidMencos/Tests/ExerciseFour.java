@@ -67,9 +67,6 @@ public class ExerciseFour extends Driver {
 
                     WebElement selectedCar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format("//div[contains(@id, '%s')]/div[contains(@class, 'src-vil__box-footer')]/div[contains(@class, 'src-vil__box-footer__content')]/a[contains(@data-vehicle-add, '%s')]", carsShowedInPage.get(randomCarToSelect).getAttribute("id"), selectedIdCars[index]))));
                     AuxTestMethods.ClickElementsJS(driver, selectedCar);
-//                selectedCar.findElement(By.xpath(String.format("div[contains(@class, 'src-vil__box-footer')]/div[contains(@class, 'src-vil__box-footer__content')]/a[contains(@data-vehicle-add, '%s')]", selectedIdCars[index]))).click();
-//                wait.until(ExpectedConditions.attributeContains(By.xpath(String.format("//div[contains(@id, 'vehicle-%s')]", selectedIdCars[index])), "class", "src-vil__box--added"));
-//                System.out.println(String.format(">>> Class 'src-vil__box--added' found for carID %s", selectedIdCars[index]));
                     wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[contains(@id, 'compareButton')]/span[contains(@class, 'number totalCompareVehicles')]"), String.valueOf(index + 1)));
                     System.out.println(String.format(">>> Number of selected cars: %d", index + 1));
                     index++;
